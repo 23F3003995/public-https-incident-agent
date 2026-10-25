@@ -37,6 +37,15 @@ class ReceiptRow(Base):
 Base.metadata.create_all(engine)
 app = FastAPI(title="Public HTTPS Incident Agent", version="2.0.0")
 
+@app.get("/")
+def home():
+    return {
+        "status": "running",
+        "message": "Public HTTPS Incident Agent is online",
+        "health": "/health",
+        "api_docs": "/docs"
+    }
+
 def canonical(obj):
     return json.dumps(obj, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
 
